@@ -1,0 +1,16 @@
+---
+
+- name: install the apache2, mysql, php packages
+  apt: 
+    name: 
+      - apache2
+      - mysql-server
+      - python3-pymysql
+      - python3-pip
+      - php
+      - php-mysql
+      - libapache2-mod-php
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+...

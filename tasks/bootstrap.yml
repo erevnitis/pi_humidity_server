@@ -1,0 +1,64 @@
+---
+
+- name: install updates (Ubuntu)
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: change hosts file to reflect new hostname {{ device_name }}
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127.0.1.1'
+    line: '127.0.1.1 {{ device_name }}'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: change hostname file to reflect new hostname {{ device_name }}
+  ansible.builtin.template:
+    src: files/hostname.j2
+    dest: /etc/hostname
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Create group {{ default_group }}
+  group:
+    name: "{{ default_group }}"
+    state: present
+
+- name: create user {{ default_user }}
+  user:
+    name: "{{ default_user }}"
+    group: "{{ default_user }}"
+    groups: adm,sudo
+    state: present
+    password: "{{ default_password | password_hash('sha512') }}"
+    shell: "/bin/bash"
+    update_password: on_create #To update password comment this line out
+
+- name: allow for sudo permission for user {{ default_user }}
+  ansible.builtin.template:
+    src: files/sudoer.j2
+    dest: /etc/sudoers.d/{{ default_user }}
+    owner: root
+    group: root
+    mode: 0440
+    #modification_time: preserve #added for idempotence
+    #access_time: preserve #added for idempotence
+
+- name: Create .ssh Directory
+  file:
+    path: "{{ item.dir }}"
+    state: directory
+    owner: "{{ default_user }}"
+    group: "{{ default_user }}"
+    mode: 0700
+  with_items:
+    - { dir: '/home/{{ default_user }}/.ssh' }
+
+- name: add SSH key for user {{ default_user }}
+  authorized_key:
+    user: "{{ default_user }}"
+    key: "{{ ssh_key }}" # Insert your ssh key here
+...

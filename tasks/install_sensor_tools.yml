@@ -1,0 +1,44 @@
+---
+
+- name: Install i2c-tools, python3-pip
+  apt:
+    name:
+      - i2c-tools
+      - python3-pip
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install setuptools, RPI.GPIO, adafruit-blinka, adafruit-circuitpython-bme680, smbus2
+  pip:
+    name: 
+      - setuptools
+      - RPI.GPIO
+      - adafruit-blinka
+      - adafruit-circuitpython-bme680
+      - smbus2
+      - mysql-connector-python
+    state: latest
+
+- name: Copy python script to send email for low humidity
+  copy:
+    src: files/testemail.py
+    dest: /home/{{ default_user }}
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Copy python script to send sensor data to database
+  copy:
+    src: files/humidity_ansible.py
+    dest: /home/{{ default_user }}
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Add {{ default_user }} to i2c group
+  user:
+    name: "{{ default_user }}"
+    groups: i2c
+    append: yes
+...

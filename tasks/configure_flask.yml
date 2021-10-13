@@ -1,0 +1,127 @@
+---
+
+- name: Create Main Directory 'Flask'
+  ansible.builtin.file:
+    path: "/home/{{ default_user }}/flask"
+    state: directory
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0755'
+
+- name: Create Templates Directory for Flask
+  ansible.builtin.file:
+    path: "/home/{{ default_user }}/flask/templates"
+    state: directory
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0755'
+
+- name: Create Static Directory for Flask
+  ansible.builtin.file:
+    path: "/home/{{ default_user }}/flask/static"
+    state: directory
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0755'
+
+- name: Create Image Directory Inside Static Directory for Flask
+  ansible.builtin.file:
+    path: "/home/{{ default_user }}/flask/static/images"
+    state: directory
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0755'
+
+- name: Copy Portrait Background Image for webpage
+  copy:
+    src: files/ikaria_portrait.png
+    dest: "/home/{{ default_user }}/flask/static/images/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Copy Landscape Background Image for webpage
+  copy:
+    src: files/ikaria_landscape.png
+    dest: "/home/{{ default_user }}/flask/static/images/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Copy favicon
+  copy:
+    src: files/favicon.ico
+    dest: "/home/{{ default_user }}/flask/static/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Copy main_flask.py into flask Directory
+  copy:
+    src: files/main_flask.py
+    dest: "/home/{{ default_user }}/flask/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Copy base.html into flask Directory
+  copy:
+    src: files/main.html
+    dest: "/home/{{ default_user }}/flask/templates/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Copy graph.html into flask Directory
+  copy:
+    src: files/graph.html
+    dest: "/home/{{ default_user }}/flask/templates/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Copy style.css into flask static Directory
+  copy:
+    src: files/style.css
+    dest: "/home/{{ default_user }}/flask/static/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+#- name: Copy style_graph.css into flask static Directory
+#  copy:
+#    src: files/style_graph.css
+#    dest: "/home/{{ default_user }}/flask/static/"
+#    owner: "{{ default_user }}"
+#    group: "{{ default_group }}"
+#    mode: '0644'
+
+- name: Copy python file to grab humidity for webpage
+  copy:
+    src: files/just_humidity.py
+    dest: "/home/{{ default_user }}/flask/"
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
+- name: Create job that will grab humidity every 20 minutes
+  ansible.builtin.cron:
+    user: "{{ default_user }}"
+    name: "grab humidity"
+    minute: "*/20"
+    job: "python3 humidity_ansible.py"
+
+- name: Create job that will create a new historical graph every hour
+  ansible.builtin.cron:
+    user: "{{ default_user }}"
+    name: "create hourly historical graph"
+    minute: "0"
+    job: "python3 import_mysql_to_matplotlib.py"
+
+- name: Create job that will create a new portrait historical graph every hour
+  ansible.builtin.cron:
+    user: "{{ default_user }}"
+    name: "create hourly portrait historical graph"
+    minute: "1"
+    job: "python3 create_portrait_graph.py"
+...

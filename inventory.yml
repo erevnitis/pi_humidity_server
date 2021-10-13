@@ -1,0 +1,7 @@
+---
+servers:
+  hosts:
+    humidity_server:
+      ansible_host: localhost
+      ansible_user: "{{ default_user }}"
+...

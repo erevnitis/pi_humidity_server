@@ -1,0 +1,36 @@
+---
+
+- name: Create custom PHP file to view all the php info
+  ansible.builtin.template:
+    src: files/php_info.j2
+    dest: /var/www/{{ http_host }}/info.php
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+    
+- name: Edit apache2/php.ini file to set Timezone
+  ansible.builtin.lineinfile:
+    path: /etc/php/7.4/apache2/php.ini
+    regexp: '{{item.From}}'
+    line: '{{item.To}}'
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+    - { From: '^;date.timezone', To: 'date.timezone = America/Detroit'}
+    - { From: '^memory_limit', To: 'memory_limit = 512M'}
+    - { From: '^max_exe', To: 'max_execution_time = 60'}
+
+- name: Edit cli/php.ini file to set Timezone
+  ansible.builtin.lineinfile:
+    path: /etc/php/7.4/cli/php.ini
+    regexp: '{{item.From}}'
+    line: '{{item.To}}'
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+    - { From: '^;date.timezone', To: 'date.timezone = America/Detroit'}
+    - { From: '^memory_limit', To: 'memory_limit = 512M'}
+    - { From: '^max_exe', To: 'max_execution_time = 60'}
+...

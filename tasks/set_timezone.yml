@@ -1,0 +1,15 @@
+---
+
+- name: Configure ntp pool servers
+  ansible.builtin.template:
+    src: files/timesyncd.j2
+    dest: /etc/systemd/timesyncd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart timesyncd
+
+- name: update time and timezone
+  timezone:
+    name: "America/Detroit"
+...

@@ -1,0 +1,21 @@
+---
+
+app_user: "ansible"
+http_host: "humidity_server" #could be cigarsensors or something like that
+http_conf: "humidity_server.conf"
+http_port: "80"
+ansible_default: true
+default_user: "ansible"
+default_group: "wheel"
+default_password: "hktelemacher"
+mysql_username: "ansible"
+mysql_password: "hktelemacher"
+mysql_root_password: "hktelemacher"
+device_name: 'humidity_server'
+api_key: "3abb15618d2ab25c6767cbfd92ab8a63"
+zip_code: '44114'
+ssh_key: 'xxxxxxxxxxxx'
+sender_email: 'xxxxxx'
+receiver_email: 'xxxxxxx'
+email_password: 'xxxxxxxx'
+...
