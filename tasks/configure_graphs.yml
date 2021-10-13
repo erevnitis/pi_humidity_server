@@ -8,6 +8,14 @@
       - flask
     state: latest
 
+- name: Copy python program to convert yaml to python
+  copy:
+    src: files/variables.py
+    dest: /home/{{ default_user }}/
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0644'
+
 - name: Install python program to grab mysql data
   copy:
     src: files/import_mysql_to_matplotlib.py

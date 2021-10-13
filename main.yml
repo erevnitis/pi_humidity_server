@@ -1,5 +1,5 @@
 ---
-- hosts: humidity_server
+- hosts: localhost
   become: true
   vars_files:
     - vars/default.yml
@@ -8,25 +8,25 @@
     #- name: Bootstrap
     #  import_tasks: bootstrap.yml
     - name: SetTimezone
-      import_tasks: set_timezone.yml
+      import_tasks: tasks/set_timezone.yml
     - name: Install_Lamp
-      import_tasks: install_lamp.yml
+      import_tasks: tasks/install_lamp.yml
     - name: Configure Apache
-      import_tasks: apache_config.yml
+      import_tasks: tasks/apache_config.yml
     - name: Configure MySQL
-      import_tasks: mysql_config.yml
+      import_tasks: tasks/mysql_config.yml
     - name: Configure PHP
-      import_tasks: php_config.yml
+      import_tasks: tasks/php_config.yml
     - name: Create Database
-      import_tasks: create_database.yml
+      import_tasks: tasks/create_database.yml
     - name: Install phpMyAdmin
-      import_tasks: install_phpmyadmin.yml
+      import_tasks: tasks/install_phpmyadmin.yml
     - name: Install Sensor Tools
-      import_tasks: install_sensor_tools.yml
+      import_tasks: tasks/install_sensor_tools.yml
     - name: Install graphing tools
-      import_tasks: configure_graphs.yml
+      import_tasks: tasks/configure_graphs.yml
     - name: Install and Configure Flask
-      import_tasks: configure_flask.yml
+      import_tasks: tasks/configure_flask.yml
       
   handlers:
   - name: restart apache2
