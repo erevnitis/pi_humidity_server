@@ -89,7 +89,7 @@ ssh ansible@192.168.1.11
 ```
 Clone the repository
 ```bash
-git clone xxxxxxxxxxx
+git clone https://github.com/erevnitis/pi_humidity_server.git
 ```
 Change directory to the repository directory
 ```bash
