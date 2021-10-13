@@ -101,14 +101,31 @@ Clone the repository
 ```bash
 git clone https://github.com/erevnitis/pi_humidity_server.git
 ```
+## Configure variables in vars/default directory
+Edit vars/default.yml
+```bash
+sudo nano pi_humidity_server/vars/default.yml
+```
+Insert:
+- OpenWeatherMap API Key
+- Zip Code
+- Sender Email
+- Receiver Email
+- Email Password
+- SSH Key if you're going to use the playbook to add the ssh-key  
+
 Change directory to the repository directory
 ```bash
 cd pi_humidity_server
 ```
+
 Run the playbook
 ```bash
 ansible-playbook main.yml
 ```
+## Commit the changes
+We've added our user 'ansible' to the group 'i2c' but without either logging out and back in or restarting the device 'ansible' is not a member of the group.  This will prevent us from reading the sensor data.  To fix this either log-out and back in again or restart the device.  
+
 # Connect the Sensor
 To connect the sensor to the Pi
 ![BME680 Wiring](files/bme680_wiring.png)

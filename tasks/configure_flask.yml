@@ -109,19 +109,19 @@
     user: "{{ default_user }}"
     name: "grab humidity"
     minute: "*/20"
-    job: "python3 humidity_ansible.py"
+    job: "cd {{ repository }} && python3 humidity_ansible.py"
 
 - name: Create job that will create a new historical graph every hour
   ansible.builtin.cron:
     user: "{{ default_user }}"
     name: "create hourly historical graph"
     minute: "0"
-    job: "python3 import_mysql_to_matplotlib.py"
+    job: "cd {{ repository }} && python3 import_mysql_to_matplotlib.py"
 
 - name: Create job that will create a new portrait historical graph every hour
   ansible.builtin.cron:
     user: "{{ default_user }}"
     name: "create hourly portrait historical graph"
     minute: "1"
-    job: "python3 create_portrait_graph.py"
+    job: "cd {{ repository }} && python3 create_portrait_graph.py"
 ...
