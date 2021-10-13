@@ -120,7 +120,23 @@ and
 python3 import_mysql_to_matplotlib.py
 ```
 # View webpage
+Navigate to the flask directory
+```bash
+cd flask
+```
+Start the webserver
+```bash
+python3 main_flask.py
+```
 Using a browser navigate to the Pi's IP address and port 5000  
-In this example 192.168.1.11:5000 and we should see the webpage with Ikaria(an island in Greece) as the background
+In this example 192.168.1.11:5000 and we should see this:
+![flask_main_page](files/flask_main_page.png)
+# Configure the database
+If you need to make adjustments to the database you can use phpMyAdmin  
+Navigate to the device IP address and /phpmyadmin for the homepage  
+In this case it's at 192.168.1.11/phpmyadmin and here's what you should see:
+![phpmyadmin_login_page](files/phpmyadmin.png)
+username is 'ansible'  
+password is 'khtelemacher'
 
 

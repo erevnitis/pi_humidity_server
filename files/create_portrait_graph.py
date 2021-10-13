@@ -7,11 +7,11 @@ import mysql.connector
 from variables import get_var
 
 # Variables
-mysql_user = get_var('mysql_user')
-mysql_user_pw = get_var('mysql_user_pw')
+mysql_username = get_var('mysql_username')
+mysql_password = get_var('mysql_password')
 default_user = get_var('default_user')
 # Create a variable used to connect to the database
-mydb=mysql.connector.connect(host="localhost",user=mysql_user,password=mysql_user_pw,database="humidity")
+mydb=mysql.connector.connect(host="localhost",user=mysql_username,password=mysql_password,database="humidity")
 
 mycursor=mydb.cursor()
 
