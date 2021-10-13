@@ -31,7 +31,7 @@ sudo groupadd $groupname
 echo -e "${green}\n\n.....Added the group $groupname....\n\n${nocolor}"
 
 echo -e "${purple}\n\nAdd user\n\n${nocolor}"
-useradd -m -p $pass $username
+useradd -m -p $pass $username -s /bin/bash -g $groupname -G adm,sudo
 echo -e "${green}\n\n.....Added the user $username....\n\n${nocolor}"
 
 echo -e "${purple}Add sudo permissions for $username\n\n${nocolor}"
