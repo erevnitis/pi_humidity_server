@@ -18,4 +18,5 @@ ssh_key: 'xxxxxxxxxxxx'
 sender_email: 'xxxxxx'
 receiver_email: 'xxxxxxx'
 email_password: 'xxxxxxxx'
+repository: "pi_humidity_server"
 ...

@@ -23,7 +23,7 @@
 - name: Copy python script to send email for low humidity
   copy:
     src: files/testemail.py
-    dest: /home/{{ default_user }}
+    dest: /home/{{ default_user }}/{{ repository }}/
     owner: "{{ default_user }}"
     group: "{{ default_group }}"
     mode: '0644'
@@ -31,7 +31,7 @@
 - name: Copy python script to send sensor data to database
   copy:
     src: files/humidity_ansible.py
-    dest: /home/{{ default_user }}
+    dest: /home/{{ default_user }}/{{ repository }}/
     owner: "{{ default_user }}"
     group: "{{ default_group }}"
     mode: '0644'
