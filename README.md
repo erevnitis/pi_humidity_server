@@ -75,7 +75,7 @@ Creates the new file.
 Copy and paste [prepare_pi.sh](files/prepare_pi.sh)  
 Save the file   
 ```bash
-chmod +x prepare_pi.sh
+sudo chmod +x prepare_pi.sh
 ```
 Again to make the file executable
 ```bash
