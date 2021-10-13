@@ -52,7 +52,9 @@ To become root
 nano bootstrap.sh
 ``` 
 To create the file we need to past into  
-Copy the contents of [bootstrap.sh](files/bootstrap.sh), paste them then save them  
+Copy the contents of [bootstrap.sh](files/bootstrap.sh),  
+----------> Be sure to insert your ssh key into the variables <-----------  
+save the file  
 ```bash
 chmod +x bootstrap.sh
 ```
