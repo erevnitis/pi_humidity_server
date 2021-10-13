@@ -61,8 +61,16 @@ To make the file executable
 ./bootstrap.sh
 ```
 To run the script  
+
+## Issue #1
+If you get:
+```
+Waiting for cache lock: Could not get lock..etc
+```
+Ubunut may be updating in the background.  One course of action is to wait until that proces is finished and restart the boostrap.sh script.
+
 ## Install GIT and Ansible
-The end of bootstrap.sh reboots the device  
+The last command of bootstrap.sh reboots the device  
 Reconnect to the device using the new username 'ansible'
 ```bash
 ssh ansible@192.168.1.11
@@ -105,7 +113,11 @@ To connect the sensor to the Pi
 
 ## Create an entry in the database
 The Pi has been configured to populate the database by taking readings every 20 minutes via cron  
-You can test the python script 
+You can test the python script.
+In the pi_humidity_server directory
+```
+/home/ansible/pi_humidity_server
+```
 ```bash
 python3 humidity_ansible.py
 ```
@@ -121,8 +133,8 @@ python3 import_mysql_to_matplotlib.py
 ```
 # View webpage
 Navigate to the flask directory
-```bash
-cd flask
+```
+/home/ansible/flask
 ```
 Start the webserver
 ```bash
