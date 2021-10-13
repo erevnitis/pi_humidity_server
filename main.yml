@@ -5,8 +5,8 @@
     - vars/default.yml
 
   tasks:
-    - name: Bootstrap
-      import_tasks: bootstrap.yml
+    #- name: Bootstrap
+    #  import_tasks: bootstrap.yml
     - name: SetTimezone
       import_tasks: set_timezone.yml
     - name: Install_Lamp

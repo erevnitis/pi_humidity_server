@@ -19,11 +19,11 @@ echo -e "${purple}\n\nI'm going to update the OS now.....\n\n${nocolor}"
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean -y
 
 echo -e "${purple}\n\nChange hostname in hostname file\n\n${nocolor}"
-sed -i "s/raspberry/$device_name/" /etc/hostname
+sed -i "s/ubuntu/$device_name/" /etc/hostname
 echo -e "${green}\n\n.....Hostname changed to $device_name in hostname file....\n\n${nocolor}"
 
 echo -e "${purple}\n\nChange hostname in hosts file\n\n${nocolor}"
-sed -i "s/raspberry/$device_name/" /etc/hosts
+echo "127.0.1.1 $device_name" | tee -a /etc/hosts > /dev/null
 echo -e "${green}\n\n.....Hostname changed to $device_name in hosts file....\n\n${nocolor}"
 
 echo -e "${purple}\n\nAdd group $groupname\n\n${nocolor}"
