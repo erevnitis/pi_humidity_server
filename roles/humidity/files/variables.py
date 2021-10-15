@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import yaml
-filename = 'vars/default.yml'
+filename = 'default.yml'
 
 def get_var(requested):
     with open(filename) as f:

@@ -1,0 +1,10 @@
+---
+
+- name: Reset Connection
+  meta: reset_connection
+
+- name: Change to user {{ default_user }}
+  become: true
+  become_user: '{{ default_user }}'
+  
+...

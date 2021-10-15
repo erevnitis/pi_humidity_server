@@ -1,7 +1,13 @@
 ---
 servers:
   hosts:
-    humidity_server:
+    ubuntu_pi:
+      ansible_host: "{{ ubuntu_pi_ip }}"
+      ansible_user: "ubuntu"
+    ansible_pi:
+      ansible_host: "{{ ansible_pi_ip }}" #should be the same as ubuntu_pi_ip but here is some flexibility
+      ansible_user: "{{ default_user }}"
+    local_pi:
       ansible_host: localhost
       ansible_user: "{{ default_user }}"
 ...

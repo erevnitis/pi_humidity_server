@@ -1,0 +1,24 @@
+---
+
+app_user: "ansible"
+http_host: "humidity_server" #could be cigarsensors or something like that
+http_conf: "humidity_server.conf"
+http_port: "80"
+ansible_default: true
+default_user: "ansible"
+default_group: "wheel"
+default_password: "hktelemacher"
+mysql_username: "ansible"
+mysql_password: "hktelemacher"
+mysql_root_password: "hktelemacher"
+device_name: 'humidity_server'
+repository: "pi_humidity_server"
+ubuntu_pi_ip: 10.51.55.83
+ansible_pi_ip: "10.51.55.83"
+api_key: "3abb15618d2ab25c6767cbfd92ab8a63"
+zip_code: '43210'
+ssh_key: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdqsF1f+6IxZ0cQJSFpG8eXsEcyLwMcJqVQftJDcl1W testserver'
+sender_email: 'johnservertest@gmail.com'
+receiver_email: 'johnservertest@gmail.com'
+email_password: '1johnserverTEST1'
+...

@@ -1,22 +1,18 @@
 ---
-- hosts: localhost
+- hosts: ansible_pi
   become: true
   vars_files:
     - vars/default.yml
 
   tasks:
-    - name: Bootstrap
-      import_tasks: bootstrap.yml
-    - name: SetTimezone
-      import_tasks: tasks/set_timezone.yml
     - name: Install_Lamp
       import_tasks: tasks/install_lamp.yml
     - name: Configure Apache
-      import_tasks: tasks/apache_config.yml
+      import_tasks: tasks/configure_apache.yml
     - name: Configure MySQL
-      import_tasks: tasks/mysql_config.yml
+      import_tasks: tasks/configure_mysql.yml
     - name: Configure PHP
-      import_tasks: tasks/php_config.yml
+      import_tasks: tasks/configure_php.yml
     - name: Create Database
       import_tasks: tasks/create_database.yml
     - name: Install phpMyAdmin

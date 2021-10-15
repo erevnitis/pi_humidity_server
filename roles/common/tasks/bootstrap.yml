@@ -30,7 +30,7 @@
 - name: create user {{ default_user }}
   user:
     name: "{{ default_user }}"
-    group: "{{ default_user }}"
+    group: "{{ default_group }}"
     groups: adm,sudo
     state: present
     password: "{{ default_password | password_hash('sha512') }}"
@@ -52,7 +52,7 @@
     path: "{{ item.dir }}"
     state: directory
     owner: "{{ default_user }}"
-    group: "{{ default_user }}"
+    group: "{{ default_group }}"
     mode: 0700
   with_items:
     - { dir: '/home/{{ default_user }}/.ssh' }
@@ -61,4 +61,5 @@
   authorized_key:
     user: "{{ default_user }}"
     key: "{{ ssh_key }}" # Insert your ssh key here
+  notify: Reboot pi
 ...
