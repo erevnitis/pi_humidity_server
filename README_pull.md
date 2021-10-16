@@ -11,10 +11,11 @@ The complete process is as follows:
     - sudo permissions
     - ssh key
 - Copy and paste another script to allow the Pi to receive the repository
-- Install Apache, MySQL, PHP and configure them for this application
-- Install phpMyAdmin to more easily administer the database
-- Install python dependencies to allow the Pi to read the data from the BME680 sensor
-- Install a Flask instance to allow for easy viewing of current and historical humidity data
+- Run an Ansible Playbook to:
+    - Install Apache, MySQL, PHP and configure them for this application
+    - Install phpMyAdmin to more easily administer the database
+    - Install python dependencies to allow the Pi to read the data from the BME680 sensor
+    - Install a Flask instance to allow for easy viewing of current and historical humidity data
 ## Requirements
 This project has been tested on a Raspberry Pi3 and Raspberry Pi4  
 In this project I am using a BME 680 sensor for the humidity readings  
