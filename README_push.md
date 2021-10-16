@@ -74,6 +74,10 @@ To connect the sensor to the Pi follow this diagram:
 
 ## Create the first entry in the database
 Reconnect to the Pi as it was rebooted at then end of the playbook.  
+```bash
+ssh ansible@192.168.1.11
+```
+
 The Pi has been configured to populate the database by taking readings every 20 minutes via cron but you can test the python script immediately and create the first database entry.
 
 ```bash
