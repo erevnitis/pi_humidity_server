@@ -20,8 +20,8 @@ These need to be configured in vars/default.yml
 # Project Steps
 ## Prepare the Raspberry Pi
 Download Ubuntu Server on the Pi  
-Here is a tutorial from Canonical [Install Ubuntu Server on the Pi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview)
-It is important to add a file named 'ssh' to the boot partition to ssh into the device
+Here is a tutorial from Canonical [Install Ubuntu Server on the Pi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview)  
+It is important to add a file named 'ssh' to the boot partition to ssh into the device  
 When the SD card is formatted and Ubuntu Server is installed, insert the card, connect an ethernet cable and power the Pi on.
 ## Determine the IP Address
 There are many ways to determine the IP address of the Pi
@@ -51,11 +51,23 @@ To have Ansible easily connect to the Pi, copy your ssh public key to the Pi:
 ```bash
 ssh-copy-id -i (some_ssh_key.pub) ubuntu@192.168.1.11 
 ```
+# Clone the Repository
+To clone the repository you will need Git on your machine.  
+Here is a link to the instructions on how to install Git [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)  
+
+To clone the repository to your local machine:
+```bash
+git clone git@github.com:erevnitis/pi_humidity_server.git
+```
+This will place all the necessary files on your local machine
 
 ## Run main.py
-The playbook should configure and install all the items necessary for the project  
+The playbook should configure and install all the items necessary for the project.  
+To run the playbook, navigate to the pi_humidity_server directory on your device
+```bash
+ansible-playbook main.yml
+```
 The Pi will reboot at the end of the playbook to complete all of necessary changes.  
-
 # Connect the BME680 Sensor to the GPIO pins on the Pi
 To connect the sensor to the Pi follow this diagram:
 ![BME680 Wiring](files/bme680_wiring.png)

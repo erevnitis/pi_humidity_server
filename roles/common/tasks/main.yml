@@ -1,6 +1,6 @@
 ---
 
-- import_tasks: bootstrap.yml
 - import_tasks: set_timezone.yml
+- import_tasks: bootstrap.yml
 - import_tasks: reset_connection.yml
 ...

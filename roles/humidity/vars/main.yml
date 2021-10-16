@@ -13,8 +13,8 @@ mysql_password: "hktelemacher"
 mysql_root_password: "hktelemacher"
 device_name: 'humidity_server'
 repository: "pi_humidity_server"
-ubuntu_pi_ip: 10.51.55.84
-ansible_pi_ip: 10.51.55.84
+ubuntu_pi_ip: 10.51.55.85
+ansible_pi_ip: 10.51.55.85
 api_key: "3abb15618d2ab25c6767cbfd92ab8a63"
 zip_code: '43210'
 ssh_key: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHdqsF1f+6IxZ0cQJSFpG8eXsEcyLwMcJqVQftJDcl1W testserver'
