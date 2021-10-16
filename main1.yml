@@ -2,7 +2,7 @@
 - hosts: ubuntu_pi
   become: true
   vars_files:
-    - vars/default.yml
+    - vars/main.yml
 
   tasks:
     - name: SetTimezone

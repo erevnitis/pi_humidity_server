@@ -2,7 +2,7 @@
 - hosts: ansible_pi
   become: true
   vars_files:
-    - vars/default.yml
+    - vars/main.yml
 
   tasks:
     - name: Install_Lamp
@@ -39,3 +39,4 @@
     service:
       name: systemd-timesyncd
       state: restarted
+...

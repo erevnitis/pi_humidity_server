@@ -2,7 +2,7 @@
 
 - name: Create custom PHP file to view all the php info
   ansible.builtin.template:
-    src: files/php_info.j2
+    src: templates/php_info.j2
     dest: /var/www/{{ http_host }}/info.php
     owner: "{{ default_user }}"
     group: "{{ default_group }}"

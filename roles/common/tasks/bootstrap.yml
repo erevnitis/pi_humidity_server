@@ -16,7 +16,7 @@
 
 - name: change hostname file to reflect new hostname {{ device_name }}
   ansible.builtin.template:
-    src: files/hostname.j2
+    src: templates/hostname.j2
     dest: /etc/hostname
     owner: root
     group: root
@@ -39,7 +39,7 @@
 
 - name: allow for sudo permission for user {{ default_user }}
   ansible.builtin.template:
-    src: files/sudoer.j2
+    src: templates/sudoer.j2
     dest: /etc/sudoers.d/{{ default_user }}
     owner: root
     group: root
@@ -61,5 +61,5 @@
   authorized_key:
     user: "{{ default_user }}"
     key: "{{ ssh_key }}" # Insert your ssh key here
-  notify: Reboot pi
+  notify: reboot pi
 ...

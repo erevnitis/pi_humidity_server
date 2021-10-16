@@ -2,7 +2,7 @@
 
 - name: Configure ntp pool servers
   ansible.builtin.template:
-    src: files/timesyncd.j2
+    src: templates/timesyncd.j2
     dest: /etc/systemd/timesyncd.conf
     owner: root
     group: root

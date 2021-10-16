@@ -43,5 +43,5 @@
     name: "{{ default_user }}"
     groups: i2c
     append: yes
-  notify: reload user
+  notify: reboot pi
 ...

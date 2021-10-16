@@ -20,7 +20,7 @@
 
 - name: Create .my.cnf
   template:
-    src: files/client.my.cnf.j2
+    src: templates/client.my.cnf.j2
     dest: "/root/.my.cnf"
     owner: root
     group: root

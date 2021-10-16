@@ -2,7 +2,7 @@
 - hosts: localhost
   become: true
   vars_files:
-    - vars/default.yml
+    - vars/main.yml
 
   tasks:
     - name: Bootstrap

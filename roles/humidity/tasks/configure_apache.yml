@@ -10,12 +10,12 @@
 
 - name: Create index test page
   ansible.builtin.template:
-    src: "files/index.html.j2"
+    src: "templates/index.html.j2"
     dest: "/var/www/{{ http_host }}/index.html"
 
 - name: Create Apache virtualhost
   ansible.builtin.template:
-    src: "files/server.conf.j2"
+    src: "templates/server.conf.j2"
     dest: /etc/apache2/sites-available/{{ http_conf }}
   notify: reload apache2
 

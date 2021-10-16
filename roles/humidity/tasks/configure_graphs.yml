@@ -21,7 +21,7 @@
       - files/create_portrait_graph.py
       - files/testemail.py
       - files/humidity_ansible.py
-      - vars/default.yml
+      - vars/main.yml
 
 #- name: Copy python program to convert yaml to python
 #  copy:
