@@ -71,4 +71,4 @@ cursor.execute("INSERT INTO bme680_tbl (temperature, inside_humidity, outside_hu
 cnx.commit()
 sleep(2)
 cnx.close()
-print("Add Another One Johnnie!")
+print("Successfully added record to database!")

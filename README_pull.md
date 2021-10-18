@@ -99,9 +99,9 @@ Clone the repository:
 git clone https://github.com/erevnitis/pi_humidity_server.git
 ```
 ## Configure variables required for the project to work
-Edit pi_humidity_server/roles/humidity/vars/main.yml
+Edit pi_humidity_server/roles/pull/vars/main.yml
 ```bash
-sudo nano ~/pi_humidity_server/roles/humidity/vars/main.yml
+sudo nano ~/pi_humidity_server/roles/pull/vars/main.yml
 ```
 Insert:
 - OpenWeatherMap API Key

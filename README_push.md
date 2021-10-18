@@ -91,7 +91,7 @@ ssh ansible@192.168.1.11
 The Pi has been configured to populate the database by taking readings every 20 minutes via cron but you can test the python script immediately and create the first database entry:
 
 ```bash
-python3 humidity_ansible.py
+python3 get_humidity.py
 ```
 # Create initial graphs
 The Pi has been configured to create a graph each hour to display on the webpage.  
@@ -101,7 +101,7 @@ python3 create_portrait_graph.py
 ```
 and:
 ```bash
-python3 import_mysql_to_matplotlib.py
+python3 create_landscape_graph.py
 ```
 # Configure the database
 If you need to make adjustments to the database you can use phpMyAdmin  
