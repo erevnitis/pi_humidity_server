@@ -31,7 +31,7 @@ There are many ways to determine the IP address of the Pi
 I find mine with the help of my DHCP server on my pfSense firewall
 When you find the IP address you can SSH into the device-this example uses the address of 192.168.1.11:
 ```bash
-SSH ubunut@192.168.1.11
+ssh ubunut@192.168.1.11
 ```
 When prompted, the password is 'ubuntu'  
 The first time you log into the device, Ubuntu requres a password change from the default.  
@@ -51,7 +51,8 @@ Waiting for cache lock: Could not get lock /var/........etc
 While the Pi is trying to update, Ubunutu may be updating in the background.  There are a few ways to fix this but one that works every time is to wait until that process is finished and restart the boostrap.sh script.  I have seen this take as long as 15 minutes-it is usually closer to 10 though.  
 
 ## Copy SSH key to Pi
-To have Ansible easily connect to the Pi, copy your SSH public key to the Pi:
+To have Ansible easily connect to the Pi, copy your SSH public key to the Pi.  
+From your local machine:
 ```bash
 SSH-copy-id -i (some_SSH_key.pub) ubuntu@192.168.1.11 
 ```
@@ -64,6 +65,9 @@ To clone the repository to your local machine:
 git clone git@github.com:erevnitis/pi_humidity_server.git
 ```
 This will place all the necessary files on your local machine
+
+# Install Ansible if it is not already installed
+I find the tutorials published by Digital Ocean to be excellent.  If you do not have Ansible on your local machne, follow these steps to get Ansible on your device: [How to Install and Configure Ansible](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04)
 
 ## Run main_push.py
 The playbook should configure and install all the items necessary for the project.  
