@@ -14,10 +14,10 @@ mysql_root_password: "hktelemacher"
 device_name: 'humidity_server'
 repository: "pi_humidity_server"
 ansible_pi_ip: 192.168.1.11
-api_key: "openweathermap_API_here"
+api_key: "API KEY HERE"
 zip_code: '43210'
-ssh_key: 'ssh-key_here'
-sender_email: 'youremail@whatever.com'
-receiver_email: 'youremail@whatever.com'
-email_password: 'mysupersecretpasswordhere'
+ssh_key: 'SSH KEY HERE'
+sender_email: 'YOUR_EMAIL@EMAIL.WHATEVER HERE'
+receiver_email: 'YOUR_EMAIL@EMAIL.WHATEVER HERE'
+email_password: 'YOUR_EMAIL_SUPER_SECRET_PASSWORD HERE'
 ...

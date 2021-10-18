@@ -134,6 +134,32 @@ Reconnect to the Pi as it was rebooted at then end of the playbook:
 ```bash
 ssh ansible@192.168.1.11
 ```
+## Just to make sure:
+
+To ensure the Pi has rebooted, check the list of groups 'ansible' is a member of:
+
+```bash
+groups
+```
+
+What should be returned is  
+
+```
+wheel adm sudo i2c
+```
+
+If this is not the case, either reload the Pi or logout:
+
+```bash
+su ubunut
+```
+
+And log back in:
+
+```bash
+su ansible
+```
+
 
 The Pi has been configured to populate the database by taking readings every 20 minutes via cron but you can test the python script immediately and create the first database entry:
 

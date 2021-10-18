@@ -6,5 +6,5 @@ default_group: "wheel"
 default_password: "hktelemacher"
 device_name: 'humidity_server'
 ubuntu_pi_ip: 192.168.1.11
-ssh_key: 'ssh-key_here'
+ssh_key: 'SSH KEY HERE'
 ...
