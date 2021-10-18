@@ -10,6 +10,7 @@ from variables import get_var
 mysql_username = get_var('mysql_username')
 mysql_password = get_var('mysql_password')
 default_user = get_var('default_user')
+file_save = "/home/" + default_user + "/flask/static/images/humidor_graph.png"
 
 # Create a variable used to connect to the database
 mydb=mysql.connector.connect(host="localhost",user=mysql_username,password=mysql_password,database="humidity")
@@ -48,4 +49,4 @@ plt.ylabel("Humidity Level", fontsize=20)
 plt.xlabel("ID", fontsize=20)
 
 # Place the "green range" of the plot
-plt.savefig('~/flask/static/images/humidor_graph.png')
+plt.savefig(file_save)
