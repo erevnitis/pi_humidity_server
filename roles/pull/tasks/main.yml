@@ -18,4 +18,6 @@
   import_tasks: configure_graphs.yml
 - name: Install and Configure Flask
   import_tasks: configure_flask.yml
+- name: Reset Connection
+  import_tasks: reset_connection.yml
 ...

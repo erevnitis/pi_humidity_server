@@ -57,7 +57,4 @@
     - files/main.html
     - files/graph.html
     #- files/style_graph.css
-
-- name: Reset Connection
-  meta: reset_connection
 ...
