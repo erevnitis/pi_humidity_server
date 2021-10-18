@@ -5,11 +5,9 @@
   roles:
     - role: common
       
-    
 - hosts: ansible_pi
   become: true
   vars_files: roles/humidity/vars/main.yml
   roles:
     - role: humidity
-      
 ...

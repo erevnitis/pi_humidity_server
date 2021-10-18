@@ -1,0 +1,28 @@
+---
+
+- name: Install phpMyAdmin Dependencies
+  apt:
+    name:
+      - php-mbstring
+      - php-gd
+      - php-json
+      - php-mysql
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install phpMyAdmin
+  apt:
+    name: phpmyadmin
+    state: latest
+
+- name: Edit Apache2.conf file to permit phpMyAdmin
+  lineinfile:
+    dest: /etc/apache2/apache2.conf
+    state: present
+    regexp: "^Include.+phpmyadmin.+$"
+    line: "Include /etc/phpmyadmin/apache.conf"
+    insertafter: "EOF"
+    mode: '0644'
+  notify: restart apache2
+...

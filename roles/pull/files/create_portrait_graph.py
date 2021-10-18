@@ -10,7 +10,6 @@ from variables import get_var
 mysql_username = get_var('mysql_username')
 mysql_password = get_var('mysql_password')
 default_user = get_var('default_user')
-
 # Create a variable used to connect to the database
 mydb=mysql.connector.connect(host="localhost",user=mysql_username,password=mysql_password,database="humidity")
 
@@ -33,7 +32,10 @@ for i in mycursor:
 font0 = FontProperties()
 
 # Set the size of the matplotlib canvas
-plt.figure(figsize = (16,9))
+# iphone X/XS 375px x 812px
+# iphone XR 414px x 896px
+# This is here to set the smaller size
+plt.figure(figsize = (3.75, 8.12)) 
 
 # Generate the scatterplot
 plt.plot(id, inside_humidity, label= "Humidor Humidity")
@@ -43,9 +45,9 @@ plt.axhspan(60, 75, color='green', alpha=0.3)
 plt.axhspan(40, 60, color="red", alpha=0.1)
 
 # Add titles to the chart and axes
-plt.title("Humidor Historical Humidity", fontsize=20)
-plt.ylabel("Humidity Level", fontsize=20)
+plt.title("Humidor Historical Humidity", fontsize=18)
+plt.ylabel("Humidity %", fontsize=15)
 plt.xlabel("ID", fontsize=20)
 
 # Place the "green range" of the plot
-plt.savefig('/home/' + default_user + '/flask/static/images/humidor_graph.png')
+plt.savefig("~/flask/static/images/portrait_humidor_graph.png", bbox_inches = "tight")

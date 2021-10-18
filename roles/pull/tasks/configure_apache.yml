@@ -1,0 +1,30 @@
+---
+
+- name: Create Directory for {{ http_host }} Domain.
+  ansible.builtin.file:
+    path: "/var/www/{{ http_host }}"
+    state: directory
+    owner: "{{ default_user }}"
+    group: "{{ default_group }}"
+    mode: '0755'
+
+- name: Create index test page
+  ansible.builtin.template:
+    src: "templates/index.html.j2"
+    dest: "/var/www/{{ http_host }}/index.html"
+
+- name: Create Apache virtualhost
+  ansible.builtin.template:
+    src: "templates/server.conf.j2"
+    dest: /etc/apache2/sites-available/{{ http_conf }}
+  notify: reload apache2
+
+- name: Enable new site
+  shell: /usr/sbin/a2ensite {{ http_conf }}
+  notify: reload apache2
+
+- name: Disable the default site
+  shell: /usr/sbin/a2dissite 000-default.conf
+  # when: disable_default
+  notify: reload apache2
+...

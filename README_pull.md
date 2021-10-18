@@ -4,18 +4,10 @@ Provision a Raspberry Pi4 with the tools necessary to record humidity and displa
 ## Overview
 The complete process is as follows:
 - Flash an SD card with Ubuntu Server 20.04
-- Copy and paste a "bootstrap" script to configure:
-    - Timezone
-    - Group
-    - User
-    - sudo permissions
-    - ssh key
-- Copy and paste another script to allow the Pi to receive the repository
-- Run an Ansible Playbook to:
-    - Install Apache, MySQL, PHP and configure them for this application
-    - Install phpMyAdmin to more easily administer the database
-    - Install python dependencies to allow the Pi to read the data from the BME680 sensor
-    - Install a Flask instance to allow for easy viewing of current and historical humidity data
+- Copy and paste the "bootstrap" script
+- Copy and paste the "prepare_pi.sh script
+- Run an Ansible Playbook main_pull.yml
+
 ## Requirements
 This project has been tested on a Raspberry Pi3 and Raspberry Pi4  
 In this project I am using a BME 680 sensor for the humidity readings  
@@ -23,7 +15,7 @@ I've successfully used the BME 280 and may publish another playbook for that sen
 ## Variables 
 Users of this repository will have to add thier own:
 - sender_email, receiver_email, email password <- for email notifications of low humidity  
-- ssh key
+- SSH key
 - zip code
 - openweathermap API key
 
@@ -31,81 +23,85 @@ These can all be configured in vars/default.yml
 # Project Steps
 ## Prepare the Raspberry Pi
 Download Ubuntu Server on the Pi  
-Here is a tutorial from Canonical [Install Ubuntu Server on the Pi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview)
-It is important to add a file named 'ssh' to the boot partition to ssh into the device
-When the SD card is formatted and Ubuntu Server is installed, insert the card, connect an ethernet cable and power the Pi on.
+Here is a tutorial from Canonical [Install Ubuntu Server on the Pi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview) which lays-out all the steps needed.
+It is important to add a file named 'ssh' to the boot partition to SSH into the device
+After the SD card is formatted and Ubuntu Server is installed, insert the SD card into the Pi, connect an ethernet cable and power the Pi on.
 ## Determine the IP Address
 There are many ways to determine the IP address of the Pi
 I find mine with the help of my DHCP server on my pfSense firewall
-When you find the IP address you can ssh into the device-this example has the address as 192.168.1.11
+When you find the IP address you can SSH into the device-this example uses the address of 192.168.1.11:
 ```bash
 ssh ubunut@192.168.1.11
 ```
-When prompted, the password is 'ubuntu'
+When prompted, the password is 'ubuntu'  
+The first time you log into the device, Ubuntu requres a password change from the default.  
+Complete the process of changing the default password and log in again to the Pi  
+
 ## Update the OS and configure the Pi
 The Pi needs some parameters changed to be able to receive the playbook.
-We need to copy and paste the bootstrap.sh file to a newly created file
+To accomplish this, copy and paste the bootstrap.sh file to a newly created file on the Pi.  
+But first we need to become the root user on the Pi:
 ```bash
 sudo su
 ```
-To become root
+Then using your favorite text editor, I'm using nano here, create a file named 'bootstrap.sh':
 ```bash
 nano bootstrap.sh
-``` 
-To create the file we need to past into  
-Copy the contents of [bootstrap.sh](files/bootstrap.sh),  
-----------> Be sure to insert your ssh key into the variables <-----------  
-save the file  
+```
+Copy the contents of [bootstrap.sh](files/bootstrap.sh) and paste them into the new 'bootstrap.sh' file on the Pi.    
+----------> Be sure to insert your SSH key into the variables <-----------  
+Save the file with 'CTRL-X' then 'ENTER'.  
+Next we need to make the file executable.  To do so:
 ```bash
 chmod +x bootstrap.sh
 ```
-To make the file executable
+Now we can run the first of the two 'setup' scripts on the Pi:
 ```bash
 ./bootstrap.sh
 ```
-To run the script  
 
-## Issue #1
-If you get:
+## Possible Issue you may encounter
+If you see this:
 ```
-Waiting for cache lock: Could not get lock..etc
+Waiting for cache lock: Could not get lock /var/........etc
 ```
-Ubunut may be updating in the background.  One course of action is to wait until that proces is finished and restart the boostrap.sh script.
+While the Pi is trying to update, Ubunutu may be updating in the background.  There are a few ways to fix this but one that works every time is to wait until that process is finished and restart the boostrap.sh script.  I have seen this take as long as 15 minutes-it is usually closer to 10 though.
 
 ## Install GIT and Ansible
-The last command of bootstrap.sh reboots the device  
-Reconnect to the device using the new username 'ansible'
+The last command of bootstrap.sh reboots the Pi so we have to reconnect to the Pi this time using the new username 'ansible':
 ```bash
 ssh ansible@192.168.1.11
 ```
 We have one more script to cut and paste.  This will allow us to import the repository and run the playbook.  
+Create a new file named 'prepare_pi.sh':
 ```bash
 sudo nano prepare_pi.sh
 ```
-Creates the new file.  
-Copy and paste [prepare_pi.sh](files/prepare_pi.sh)  
-Save the file   
+Copy the contents of [prepare_pi.sh](files/prepare_pi.sh) and paste them into the new 'prepare_pi.sh' file on the Pi.
+Save the file with 'CTRL-X' then 'ENTER'.  
+We need to make this file executable:
 ```bash
 sudo chmod +x prepare_pi.sh
 ```
-Again to make the file executable
+Now run the second of the two 'setup' scripts on the Pi:
 ```bash
 ./prepare_pi.sh
 ```
-To run the script.  At the end, the Pi will reboot again.  
+The last command in the script will have the Pi reboot again.  
 ## Clone the repository
-SSH into the device
+We are finally ready to use Ansible to automate the remainder of the process.  To do so we need to grab the playbook from the repository.  
+SSH into the device:
 ```bash
 ssh ansible@192.168.1.11
 ```
-Clone the repository
+Clone the repository:
 ```bash
 git clone https://github.com/erevnitis/pi_humidity_server.git
 ```
-## Configure variables in vars/default directory
-Edit vars/default.yml
+## Configure variables required for the project to work
+Edit pi_humidity_server/roles/humidity/vars/main.yml
 ```bash
-sudo nano pi_humidity_server/vars/default.yml
+sudo nano ~/pi_humidity_server/roles/humidity/vars/main.yml
 ```
 Insert:
 - OpenWeatherMap API Key
@@ -113,62 +109,65 @@ Insert:
 - Sender Email
 - Receiver Email
 - Email Password
-- SSH Key if you're going to use the playbook to add the ssh-key  
+Save the changes to the file.
 
-Change directory to the repository directory
+Change directory to the repository directory:
 ```bash
 cd pi_humidity_server
 ```
 
-Run the playbook
+Run the Ansible playbook main_pull.yml which will complete the configuration for the Pi:
 ```bash
-ansible-playbook main.yml
+ansible-playbook main_pull.yml
 ```
-## Commit the changes
-We've added our user 'ansible' to the group 'i2c' but without either logging out and back in or restarting the device 'ansible' is not a member of the group.  This will prevent us from reading the sensor data.  To fix this either log-out and back in again or restart the device.  
 
-# Connect the Sensor
-To connect the sensor to the Pi
+# Connect the BME680 Sensor to the GPIO pins on the Pi
+To connect the sensor to the Pi follow this diagram:
+
 ![BME680 Wiring](files/bme680_wiring.png)
 
-## Create an entry in the database
-The Pi has been configured to populate the database by taking readings every 20 minutes via cron  
-You can test the python script.
-In the pi_humidity_server directory
+## Create the first entry in the database
+Reconnect to the Pi as it was rebooted at then end of the playbook:  
+```bash
+ssh ansible@192.168.1.11
 ```
-/home/ansible/pi_humidity_server
-```
+
+The Pi has been configured to populate the database by taking readings every 20 minutes via cron but you can test the python script immediately and create the first database entry:
+
 ```bash
 python3 humidity_ansible.py
 ```
 # Create initial graphs
-The Pi has been configured to create a graph each hour to display on the webpage  
-To create the first one
+The Pi has been configured to create a graph each hour to display on the webpage.  
+To create the first one:
 ```bash
 python3 create_portrait_graph.py
 ```
-and
+and:
 ```bash
 python3 import_mysql_to_matplotlib.py
 ```
+# Configure the database
+If you need to make adjustments to the database you can use phpMyAdmin  
+Navigate to the device IP address and '/phpmyadmin' for the homepage  
+In this case it's at 192.168.1.11/phpmyadmin and here's what you should see:
+
+![phpmyadmin_login_page](files/phpmyadmin.png)
+username is 'ansible'  
+password is 'khtelemacher'  
+
 # View webpage
-Navigate to the flask directory
+For the webpages to be displayed we need to tell Flask to start the service.  
+
+Navigate to the flask directory:
+```bash
+cd ~/flask
 ```
-/home/ansible/flask
-```
-Start the webserver
+Start the webserver:
 ```bash
 python3 main_flask.py
 ```
 Using a browser navigate to the Pi's IP address and port 5000  
 In this example 192.168.1.11:5000 and we should see this:
-![flask_main_page](files/flask_main_page.png)
-# Configure the database
-If you need to make adjustments to the database you can use phpMyAdmin  
-Navigate to the device IP address and /phpmyadmin for the homepage  
-In this case it's at 192.168.1.11/phpmyadmin and here's what you should see:
-![phpmyadmin_login_page](files/phpmyadmin.png)
-username is 'ansible'  
-password is 'khtelemacher'
 
-
+![flask_main_page](files/flask_main_page.png) 

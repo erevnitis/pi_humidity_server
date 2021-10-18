@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <div class="header">
+            <h1>John's Humidor Humidity</h1>
+        </div> <!-- end of header-->
+        <div class="graph">
+            <picture>
+                <source
+                    media="(orientation: portrait) and (max-device-width: 480px)"
+                    srcset="static/images/portrait_humidor_graph.png" alt="Latest Humidor Portrait Graph">
+                <img src="static/images/humidor_graph.png" alt="Latest Humidor Graph">
+            </picture>
+        </div> <!-- end of graph-->
+    </body> <!-- end of body-->
+</html>

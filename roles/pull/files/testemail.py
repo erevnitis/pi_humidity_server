@@ -19,6 +19,8 @@ Subject: Your Humidor is Dry
 You may want to add water.  Your Humidor's most recent reading was: """ + str(humidity)
 #print(humidity)
 
+
+
 context = ssl.create_default_context()
 
 with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:

@@ -1,42 +1,8 @@
 ---
-- hosts: ansible_pi
+
+- hosts: localhost
   become: true
-  vars_files:
-    - vars/main.yml
-
-  tasks:
-    - name: Install_Lamp
-      import_tasks: tasks/install_lamp.yml
-    - name: Configure Apache
-      import_tasks: tasks/configure_apache.yml
-    - name: Configure MySQL
-      import_tasks: tasks/configure_mysql.yml
-    - name: Configure PHP
-      import_tasks: tasks/configure_php.yml
-    - name: Create Database
-      import_tasks: tasks/create_database.yml
-    - name: Install phpMyAdmin
-      import_tasks: tasks/install_phpmyadmin.yml
-    - name: Install Sensor Tools
-      import_tasks: tasks/install_sensor_tools.yml
-    - name: Install graphing tools
-      import_tasks: tasks/configure_graphs.yml
-    - name: Install and Configure Flask
-      import_tasks: tasks/configure_flask.yml
-      
-  handlers:
-  - name: restart apache2
-    service:
-      name: apache2
-      state: restarted
-
-  - name: reload apache2
-    service:
-      name: apache2
-      state: reloaded
-    
-  - name: restart timesyncd
-    service:
-      name: systemd-timesyncd
-      state: restarted
+  vars_files: roles/pull/vars/main.yml
+  roles:
+    - role: pull
 ...
