@@ -60,6 +60,6 @@
 - name: add SSH key for user {{ default_user }}
   authorized_key:
     user: "{{ default_user }}"
-    key: "{{ ssh_key }}" # Insert your ssh key here
+    key: "{{ ssh_key }}"
   notify: reboot pi
 ...

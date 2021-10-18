@@ -8,15 +8,15 @@
     group: "{{ default_group }}"
     mode: '0755'
   with_items:
-    - "~/flask"
-    - "~/flask/templates"
-    - "~/flask/static"
-    - "~/flask/static/images"
+    - /home/{{ default_user}}/flask
+    - /home/{{ default_user}}/flask/templates
+    - /home/{{ default_user}}/flask/static
+    - /home/{{ default_user}}/flask/static/images
 
 - name: Copy Portrait Background Image for webpage
   copy:
     src: "{{ item }}"
-    dest: "~/flask/static/images/"
+    dest: "/home/{{ default_user }}/flask/static/images/"
     owner: "{{ default_user }}"
     group: "{{ default_group }}"
     mode: '0644'
@@ -27,7 +27,7 @@
 - name: Copy favicon
   copy:
     src: "{{ item }}"
-    dest: "~/flask/static/"
+    dest: "/home/{{ default_user }}/flask/static/"
     owner: "{{ default_user }}"
     group: "{{ default_group }}"
     mode: '0644'
@@ -38,7 +38,7 @@
 - name: Copy main_flask.py into flask Directory
   copy:
     src: "{{ item }}"
-    dest: "~/flask/"
+    dest: "/home/{{ default_user }}/flask/"
     owner: "{{ default_user }}"
     group: "{{ default_group }}"
     mode: '0644'
@@ -49,7 +49,7 @@
 - name: Copy base.html into flask Directory
   copy:
     src: "{{ item }}"
-    dest: "~/flask/templates/"
+    dest: "/home/{{ default_user }}/flask/templates/"
     owner: "{{ default_user }}"
     group: "{{ default_group }}"
     mode: '0644'
@@ -57,4 +57,7 @@
     - files/main.html
     - files/graph.html
     #- files/style_graph.css
+
+- name: Reset Connection
+  meta: reset_connection
 ...
