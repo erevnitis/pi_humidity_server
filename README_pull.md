@@ -19,7 +19,9 @@ Users of this repository will have to add thier own:
 - zip code
 - openweathermap API key
 
-These can all be configured in vars/default.yml
+These can all be configured in 
+- roles/common/vars/main.yml  
+
 # Project Steps
 ## Prepare the Raspberry Pi
 Download Ubuntu Server on the Pi  
@@ -50,7 +52,8 @@ nano bootstrap.sh
 ```
 Copy the contents of [bootstrap.sh](files/bootstrap.sh) and paste them into the new 'bootstrap.sh' file on the Pi.    
 ----------> Be sure to insert your SSH key into the variables <-----------  
-Save the file with 'CTRL-X' then 'ENTER'.  
+Save the file with 'CTRL-X' then 'y' then 'ENTER'.  
+
 Next we need to make the file executable.  To do so:
 ```bash
 chmod +x bootstrap.sh
