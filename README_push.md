@@ -11,7 +11,8 @@ The complete process is as follows:
 ## Requirements
 This project has been tested on a Raspberry Pi3 and Raspberry Pi4  
 In this project I am using a BME 680 sensor for the humidity readings  
-I've successfully used the BME 280 and may publish another playbook for that sensor in the future
+I've successfully used the BME 280 and may publish another playbook for that sensor in the future  
+
 ## Variables 
 Users of this repository will have to add thier own:
 - sender_email, receiver_email, email password <- for email notifications of low humidity  
@@ -67,7 +68,12 @@ To clone the repository to your local machine:
 ```bash
 git clone git@github.com:erevnitis/pi_humidity_server.git
 ```
-This will place all the necessary files on your local machine
+This will place all the necessary files on your local machine  
+
+# Insert Variables
+This is the time to insert your variables into the main.yml files found in:
+- roles/common/vars/main.yml, and
+- roles/humidity/vars/main.yml  
 
 # Install Ansible if it is not already installed
 I find the tutorials published by Digital Ocean to be excellent.  If you do not have Ansible on your local machne, follow these steps to get Ansible on your device: [How to Install and Configure Ansible](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04)
