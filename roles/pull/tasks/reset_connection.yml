@@ -1,5 +1,0 @@
----
-
-- name: Reset Connection
-  meta: reset_connection
-...
