@@ -151,7 +151,7 @@ wheel adm sudo i2c
 If this is not the case, either reload the Pi or logout:
 
 ```bash
-su ubunut
+su ubuntu
 ```
 
 And log back in:
