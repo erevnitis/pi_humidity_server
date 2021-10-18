@@ -19,7 +19,10 @@ Users of this repository will have to add thier own:
 - zip code
 - openweathermap API key
 
-These can all be configured in vars/default.yml
+These can all be configured in 
+- roles/common/vars/main.yml, and
+- roles/humidity/vars/main.yml  
+
 # Project Steps
 ## Prepare the Raspberry Pi
 Download Ubuntu Server on the Pi  
