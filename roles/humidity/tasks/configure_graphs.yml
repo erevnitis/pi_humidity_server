@@ -11,7 +11,7 @@
 - name: Copy python programs 
   copy:
     src: "{{ item }}"
-    dest: "~/"
+    dest: "/home/{{ default_user }}"
     owner: "{{ default_user }}"
     group: "{{ default_group }}"
     mode: '0644'

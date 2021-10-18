@@ -8,10 +8,10 @@
     group: "{{ default_group }}"
     mode: '0755'
   with_items:
-    - "~/flask"
-    - "~/flask/templates"
-    - "~/flask/static"
-    - "~/flask/static/images"
+    - /home/{{ default_user }}/flask
+    - /home/{{ default_user }}/flask/templates
+    - /home/{{ default_user }}/flask/static
+    - /home/{{ default_user }}/flask/static/images
 
 - name: Copy Portrait Background Image for webpage
   copy:
